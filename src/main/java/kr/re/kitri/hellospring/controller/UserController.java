@@ -41,6 +41,7 @@ public class UserController {
 	public User getUsersById(@PathVariable Integer userId) {
 		System.out.println(userId + " .. from path variable");
 		return userService.searchUserByUserid(userId);
+		
 	}
 
 	// 사용자 등록
