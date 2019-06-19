@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectAllUsers();
 	}
 
+	@Override
+	public User registUser(User user) {
+		return userDao.insertUser(user);
+	}
+
 }
