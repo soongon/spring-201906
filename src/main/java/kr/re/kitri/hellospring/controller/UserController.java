@@ -2,7 +2,8 @@ package kr.re.kitri.hellospring.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,9 @@ import kr.re.kitri.hellospring.service.UserService;
 @Controller
 @ResponseBody
 public class UserController {
+	
+	private static final Logger log = 
+			LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	private UserService userService;
@@ -47,6 +51,7 @@ public class UserController {
 	// 사용자 등록
 	@PostMapping("/users")
 	public User registUser(@RequestBody User user) {
+		log.debug("사용자 등록 시작");
 		return userService.registUser(user);
 	}
 	// 사용자 수정
