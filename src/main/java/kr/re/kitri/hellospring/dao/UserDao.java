@@ -21,7 +21,7 @@ public class UserDao {
 	private JdbcTemplate jdbcTemplate;
 
 	public User selectUserByKey(Integer userId) {
-		String sql = "select * fro user where userid=?";
+		String sql = "select * from user where userid=?";
 		try {
 			User user = jdbcTemplate.queryForObject(sql, new RowMapper<User>() {
 				@Override
