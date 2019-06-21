@@ -34,9 +34,7 @@ public class UserController {
 	
 	// 사용자 전체보기
 	@GetMapping("/users")
-	public List<User> getAllUsers(
-			@RequestParam(value="page", defaultValue="0") int page) {
-		System.out.println("page number=" + page);
+	public List<User> getAllUsers() {
 		return userService.searchUsers();
 	}
 	
@@ -54,6 +52,16 @@ public class UserController {
 		log.debug("사용자 등록 시작");
 		return userService.registUser(user);
 	}
+	
+	// 사용자 조회 by username
+	@GetMapping("/users/username/{username}")
+	public List<User> searchUserByUsername(@PathVariable String username) {
+		return userService.searchUserByUsername(username);
+	}
+	
+	
+	
+	
 	// 사용자 수정
 	// 사용자 삭제
 	

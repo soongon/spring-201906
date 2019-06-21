@@ -2,6 +2,40 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.mybatis.example.BlogMapper">
+<mapper namespace="kr.re.kitri.hellospring.dao.UserDao">
   
+  <insert id="insertUser">
+  	INSERT INTO user(
+	   userid
+	  ,username
+	  ,age
+	) VALUES (
+	   #{userid}
+	  ,#{username}
+	  ,#{age}
+	)
+  </insert>
+  <select id="selectUserByKey" 
+  			parameterType="int" 
+  			resultType="kr.re.kitri.hellospring.model.User">
+  	SELECT userid		userid
+  		  ,username	    username
+  		  ,age 			age
+	FROM user
+	WHERE userid = #{userId}
+  </select>
+  
+  <select id="selectAllUsers" 
+  			resultType="kr.re.kitri.hellospring.model.User">
+  	SELECT userid, username, age 
+	FROM user
+  </select>
+  
+  <select id="selectUserByUsername"
+  			resultType="kr.re.kitri.hellospring.model.User">
+  	SELECT userid, username, age 
+	FROM user
+	WHERE username = #{username}
+  </select>
 </mapper>
+
