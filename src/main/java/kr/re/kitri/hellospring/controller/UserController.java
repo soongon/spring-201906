@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.re.kitri.hellospring.annotation.TokenRequired;
 import kr.re.kitri.hellospring.model.User;
 import kr.re.kitri.hellospring.service.SecurityService;
 import kr.re.kitri.hellospring.service.UserService;
@@ -38,18 +39,14 @@ public class UserController {
 	}
 	
 	// 사용자 전체보기
+	@TokenRequired
 	@GetMapping("/users")
-	public List<User> getAllUsers(@RequestParam String token) {
-		
-		if (token != null 
-				&& securityService.isValidToken(token)) {
-			return userService.searchUsers();
-		} else {
-			return new ArrayList<User>();
-		}
+	public List<User> getAllUsers() {
+		return userService.searchUsers();
 	}
 	
 	// 사용자 상세보기
+	@TokenRequired
 	@GetMapping("/users/{userId}")
 	public User getUsersById(@PathVariable Integer userId) {
 		System.out.println(userId + " .. from path variable");
