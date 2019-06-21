@@ -1,5 +1,6 @@
 package kr.re.kitri.hellospring.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.re.kitri.hellospring.model.User;
+import kr.re.kitri.hellospring.service.SecurityService;
 import kr.re.kitri.hellospring.service.UserService;
 
 @Controller
@@ -26,6 +28,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private SecurityService securityService;
+	
 	@GetMapping("/greet")
 	@ResponseBody
 	public String hello() {
@@ -34,8 +39,14 @@ public class UserController {
 	
 	// 사용자 전체보기
 	@GetMapping("/users")
-	public List<User> getAllUsers() {
-		return userService.searchUsers();
+	public List<User> getAllUsers(@RequestParam String token) {
+		
+		if (token != null 
+				&& securityService.isValidToken(token)) {
+			return userService.searchUsers();
+		} else {
+			return new ArrayList<User>();
+		}
 	}
 	
 	// 사용자 상세보기

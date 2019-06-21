@@ -30,4 +30,17 @@ public class SecurityServiceImpl implements SecurityService {
 		return builder.compact();
 	}
 
+	@Override
+	public boolean isValidToken(String token) {
+		Jwts.parser()
+			.setSigningKey(DatatypeConverter.parseBase64Binary(privateKey))
+			.parseClaimsJws(token);
+		return true;
+	}
+
 }
+
+
+
+
+
